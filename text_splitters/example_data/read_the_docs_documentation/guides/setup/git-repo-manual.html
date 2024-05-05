@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="readthedocs-addons-api-version" content="1"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="How to manually configure a Git repository integration" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://docs.readthedocs.io/en/stable/guides/setup/git-repo-manual.html" />
+<meta property="og:site_name" content="Read the Docs Documentation" />
+<meta property="og:description" content="In this guide, you will find the steps to manually integrate your Read the Docs project with any Git provider, including GitHub, Bitbucket, and GitLab. Manual integration setup: You need to configure your Git provider integration to call a webhook that alerts Read the Docs of changes. Read the Do..." />
+<meta property="og:image" content="https://docs.readthedocs.io/en/latest/_static/img/logo-opengraph.png" />
+<meta property="og:image:alt" content="Read the Docs Documentation" />
+<meta name="description" content="In this guide, you will find the steps to manually integrate your Read the Docs project with any Git provider, including GitHub, Bitbucket, and GitLab. Manual integration setup: You need to configure your Git provider integration to call a webhook that alerts Read the Docs of changes. Read the Do..." />
+<meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to manually configure a Git repository integration &mdash; Read the Docs user documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx_rtd_theme.css?v=3234e928" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=da32ccdd" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx_prompt_css.css?v=351d85e3" />
+
+  
+    <link rel="canonical" href="https://docs.readthedocs.io/en/stable/guides/setup/git-repo-manual.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=1de9cf8b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/hoverxref.js"></script>
+      <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+      <script src="../../_static/js/micromodal.min.js"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../_static/js/rtd_search_config.js"></script>
+      <script src="../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+      <script src="../../_static/js/expand_tabs.js?v=1e151f68"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to manage custom domains" href="../custom-domains.html" />
+    <link rel="prev" title="How to automatically configure a Git repository" href="git-repo-automatic.html" />
+   
+
+  
+  <script defer data-domain="docs.readthedocs.io" src="https://plausible.io/js/script.js"></script>
+  
+
+
+<!-- RTD Extra Head -->
+
+
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/user/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "guides/setup/git-repo-manual", "programming_language": "py", "project": "docs", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "UA-17997319-6", "version": "stable"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+
+
+<!-- end RTD <extrahead> -->
+<script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="docs" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/guides/setup/git-repo-manual.html" /></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Read the Docs tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../choosing-a-site.html">Choosing between our two platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro/getting-started-with-sphinx.html">Getting started with Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro/getting-started-with-mkdocs.html">Getting started with MkDocs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro/import-guide.html">Importing your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Example projects</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project setup and configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../config-file/index.html">Configuration file overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config-file/v2.html">Configuration file reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../automation-rules.html">Automation rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reproducible-builds.html">How to create reproducible builds</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Build process</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../builds.html">Build process overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build-customization.html">Build process customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/git-integration.html">Git integration (GitHub, GitLab, Bitbucket)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pull-requests.html">Pull request previews</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build-notifications.html">Build failure notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment-variables.html">Environment variable overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/environment-variables.html">Environment variable reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hosting documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subprojects.html">Subprojects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../localization.html">Localization and Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versioning-schemes.html">URL versioning schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom-domains.html">Custom domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../canonical-urls.html">Canonical URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/cdn.html">Content Delivery Network (CDN) and caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/sitemaps.html"><code class="docutils literal notranslate"><span class="pre">sitemap.xml</span></code> support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/404-not-found.html"><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/robots.html"><code class="docutils literal notranslate"><span class="pre">robots.txt</span></code> support</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reading documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../downloadable-documentation.html">Offline formats (PDF, ePub, HTML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../embedding-content.html">How to embed content from your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server-side-search/index.html">Server side search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server-side-search/syntax.html">Search query syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flyout-menu.html">Flyout menu</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Maintaining projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-defined-redirects.html">Redirects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/analytics.html">Analytics for search and traffic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security-log.html">Security logs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../badges.html">Status badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../explanation/documentation-structure.html">How to structure your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../best-practice/links.html">Best practices for linking to your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security-implications.html">Security considerations for documentation pages</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Business features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/index.html">Business hosting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/organizations.html">Organizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/single-sign-on.html">Single Sign-On (SSO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/sharing.html">Sharing private documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/subscriptions.html">How to manage your subscription</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to guides</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Project setup and configuration</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../connecting-git-account.html">Connecting your Read the Docs account to your Git provider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="git-repo-automatic.html">Configuring a Git repository automatically</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuring a Git repository manually</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manual-integration-setup">Manual integration setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additional-integration">Additional integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-generic-api-integration">Using the generic API integration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#authentication">Authentication</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#payload-validation">Payload validation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting">Troubleshooting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#debugging-webhooks">Debugging webhooks</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#webhook-activation-failed-make-sure-you-have-the-necessary-permissions">Webhook activation failed. Make sure you have the necessary permissions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#my-project-isn-t-automatically-building">My project isn’t automatically building</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../custom-domains.html">Managing custom domains</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../subprojects.html">Managing subprojects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hiding-a-version.html">Hiding a version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monorepo.html">Using a .readthedocs.yaml file in a sub-folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../redirects.html">Using custom URL redirects in documentation projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="versioning-schemes.html">Changing the versioning scheme of your project</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../build/index.html">Build process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maintenance/index.html">Upgrading and maintaining projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/index.html">Content, themes and SEO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access/index.html">Security and access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../management/index.html">Account management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../best-practice/index.html">Best practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/index.html">Troubleshooting problems</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Public REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/index.html">About Read the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://dev.readthedocs.io">Developer Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Read the Docs user documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">How-to guides: project setup and configuration</a></li>
+      <li class="breadcrumb-item active">How to manually configure a Git repository integration</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/readthedocs/readthedocs.org/blob/6747f91a440937e2b5088e9168ad1b87d6611129/docs/user/guides/setup/git-repo-manual.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  
+           <div itemprop="articleBody">
+             
+  <section id="how-to-manually-configure-a-git-repository-integration">
+<h1>How to manually configure a Git repository integration<a class="headerlink" href="#how-to-manually-configure-a-git-repository-integration" title="Link to this heading"></a></h1>
+<p>In this guide,
+you will find the steps to manually integrate your Read the Docs project with any Git provider,
+including GitHub, Bitbucket, and GitLab.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="git-repo-automatic.html"><span class="doc">How to automatically configure a Git repository</span></a></dt><dd><p>You are now reading the guide to configuring a Git repository manually.
+If your Read the Docs account is <a class="reference internal" href="../connecting-git-account.html"><span class="doc">connected to the Git provider</span></a>,
+we can setup the integration automatically.</p>
+</dd>
+</dl>
+</div>
+<section id="manual-integration-setup">
+<span id="webhook-integration-gitlab"></span><span id="webhook-integration-bitbucket"></span><span id="webhook-integration-github"></span><h2>Manual integration setup<a class="headerlink" href="#manual-integration-setup" title="Link to this heading"></a></h2>
+<p>You need to configure your Git provider integration to call a webhook that alerts Read the Docs of changes.
+Read the Docs will sync versions and build your documentation when your Git repository is updated.</p>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">GitHub</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Bitbucket</button><button aria-controls="panel-0-0-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-2" name="0-2" role="tab" tabindex="-1">GitLab</button><button aria-controls="panel-0-0-3" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-3" name="0-3" role="tab" tabindex="-1">Gitea</button><button aria-controls="panel-0-0-4" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-4" name="0-4" role="tab" tabindex="-1">Others</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p>Go to the <span class="guilabel">Settings</span> page for your <strong>GitHub project</strong></p></li>
+<li><p>Click <span class="guilabel">Webhooks</span> &gt; <span class="guilabel">Add webhook</span></p></li>
+<li><p>For <strong>Payload URL</strong>, use the URL of the integration on your <strong>Read the Docs project</strong>,
+found on the project’s <span class="guilabel">Admin</span> &gt; <span class="guilabel">Integrations</span> page.
+You may need to prepend <em>https://</em> to the URL.</p></li>
+<li><p>For <strong>Content type</strong>, both <em>application/json</em> and
+<em>application/x-www-form-urlencoded</em> work</p></li>
+<li><p>Fill the <strong>Secret</strong> field with the value from the integration on Read the Docs</p></li>
+<li><p>Select <strong>Let me select individual events</strong>,
+and mark <strong>Branch or tag creation</strong>, <strong>Branch or tag deletion</strong>, <strong>Pull requests</strong> and <strong>Pushes</strong> events</p></li>
+<li><p>Ensure <strong>Active</strong> is enabled; it is by default</p></li>
+<li><p>Finish by clicking <strong>Add webhook</strong>.  You may be prompted to enter your GitHub password to confirm your action.</p></li>
+</ul>
+<p>You can verify if the webhook is working at the bottom of the GitHub page under <strong>Recent Deliveries</strong>.
+If you see a Response 200, then the webhook is correctly configured.
+For a 403 error, it’s likely that the Payload URL is incorrect.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p>Go to the <span class="guilabel">Settings</span> &gt; <span class="guilabel">Webhooks</span> &gt; <span class="guilabel">Add webhook</span> page for your project</p></li>
+<li><p>For <strong>URL</strong>, use the URL of the integration on Read the Docs,
+found on the <span class="guilabel">Admin</span> &gt; <span class="guilabel">Integrations</span>  page</p></li>
+<li><p>Under <strong>Triggers</strong>, <strong>Repository push</strong> should be selected</p></li>
+<li><p>Fill the <strong>Secret</strong> field with the value from the integration on Read the Docs</p></li>
+<li><p>Finish by clicking <strong>Save</strong></p></li>
+</ul>
+</div><div aria-labelledby="tab-0-0-2" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-2" name="0-2" role="tabpanel" tabindex="0"><ul class="simple">
+<li><p>Go to the <span class="guilabel">Settings</span> &gt; <span class="guilabel">Webhooks</span> page for your GitLab project</p></li>
+<li><p>For <strong>URL</strong>, use the URL of the integration on <strong>Read the Docs project</strong>,
+found on the <span class="guilabel">Admin</span> &gt; <span class="guilabel">Integrations</span>  page</p></li>
+<li><p>Fill the <strong>Secret token</strong> field with the value from the integration on Read the Docs</p></li>
+<li><p>Leave the default <strong>Push events</strong> selected,
+additionally mark <strong>Tag push events</strong> and <strong>Merge request events</strong>.</p></li>
+<li><p>Finish by clicking <strong>Add Webhook</strong></p></li>
+</ul>
+</div><div aria-labelledby="tab-0-0-3" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-3" name="0-3" role="tabpanel" tabindex="0"><p>These instructions apply to any Gitea instance.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This isn’t officially supported, but using the “GitHub webhook” is an effective workaround,
+because Gitea uses the same payload as GitHub. The generic webhook is not compatible with Gitea.
+See <a class="reference external" href="https://github.com/readthedocs/readthedocs.org/issues/8364">issue #8364</a> for more details. Official support may be implemented in the future.</p>
+</div>
+<p>On Read the Docs:</p>
+<ul class="simple">
+<li><p>Manually create a “GitHub webhook” integration
+(this will show a warning about the webhook not being correctly set up,
+that will go away when the webhook is configured in Gitea)</p></li>
+</ul>
+<p>On your Gitea instance:</p>
+<ul class="simple">
+<li><p>Go to the <span class="guilabel">Settings</span> &gt; <span class="guilabel">Webhooks</span> page for your project on your Gitea instance</p></li>
+<li><p>Create a new webhook of type “Gitea”</p></li>
+<li><p>For <strong>URL</strong>, use the URL of the integration on Read the Docs,
+found on the <span class="guilabel">Admin</span> &gt; <span class="guilabel">Integrations</span> page</p></li>
+<li><p>Leave the default <strong>HTTP Method</strong> as POST</p></li>
+<li><p>For <strong>Content type</strong>, both <em>application/json</em> and
+<em>application/x-www-form-urlencoded</em> work</p></li>
+<li><p>Fill the <strong>Secret</strong> field with the value from the integration on Read the Docs</p></li>
+<li><p>Select <strong>Choose events</strong>,
+and mark <strong>Branch or tag creation</strong>, <strong>Branch or tag deletion</strong> and <strong>Push</strong> events</p></li>
+<li><p>Ensure <strong>Active</strong> is enabled; it is by default</p></li>
+<li><p>Finish by clicking <strong>Add Webhook</strong></p></li>
+<li><p>Test the webhook with <span class="guilabel">Delivery test</span></p></li>
+</ul>
+<p>Finally, on Read the Docs, check that the warnings have disappeared
+and the delivery test triggered a build.</p>
+</div><div aria-labelledby="tab-0-0-4" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-4" name="0-4" role="tabpanel" tabindex="0"><p>Other providers are supported through a generic webhook, see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#webhook-integration-generic"><span class="std std-ref">Using the generic API integration</span></a>.</p>
+</div></div>
+</section>
+<section id="additional-integration">
+<h2>Additional integration<a class="headerlink" href="#additional-integration" title="Link to this heading"></a></h2>
+<p>You can configure multiple incoming <a class="hxr-hoverxref hxr-tooltip reference internal" href="../../glossary.html#term-webhook"><span class="xref std std-term">webhooks</span></a>.</p>
+<p>To manually set up an integration, go to <span class="guilabel">Admin</span> &gt; <span class="guilabel">Integrations</span> &gt;  <span class="guilabel">Add integration</span>
+dashboard page and select the integration type you’d like to add.
+After you have added the integration, you’ll see a link to information about the integration.</p>
+<p>As an example, the URL pattern looks like this: <code class="docutils literal notranslate"><span class="pre">https://readthedocs.org/api/v2/webhook/&lt;project-name&gt;/&lt;id&gt;/*</span></code>.</p>
+<p>Use this URL when setting up a new integration with your provider, as explained above.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Git repositories that are imported manually <strong>do not</strong> have the required setup to send back a <strong>commit status</strong>.
+If you need this integration,
+you have to <a class="reference internal" href="git-repo-automatic.html"><span class="doc">configure the repository automatically</span></a>.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../build/email-notifications.html"><span class="doc">How to setup email notifications</span></a></dt><dd><p>Quickly enable email notifications.</p>
+</dd>
+<dt><a class="reference internal" href="../build/webhooks.html"><span class="doc">How to setup build status webhooks</span></a></dt><dd><p>Learn how to add custom webhook notifications.</p>
+</dd>
+</dl>
+</div>
+</section>
+<section id="using-the-generic-api-integration">
+<span id="webhook-integration-generic"></span><h2>Using the generic API integration<a class="headerlink" href="#using-the-generic-api-integration" title="Link to this heading"></a></h2>
+<p>For repositories that are not hosted with a supported provider, we also offer a
+generic API endpoint for triggering project builds. Similar to webhook integrations,
+this integration has a specific URL, which can be found on the project’s <strong>Integrations</strong> dashboard page
+(<span class="guilabel">Admin</span> &gt; <span class="guilabel">Integrations</span>).</p>
+<p>Token authentication is required to use the generic endpoint, you will find this
+token on the integration details page. The token should be passed in as a
+request parameter, either as form data or as part of JSON data input.</p>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p>This endpoint accepts the following arguments during an HTTP POST:</p>
+<dl>
+<dt>branches</dt><dd><p>The names of the branches to trigger builds for. This can either be an array
+of branch name strings, or just a single branch name string.</p>
+<p>Default: <strong>latest</strong></p>
+</dd>
+<dt>token</dt><dd><p>The integration token found on the project’s <strong>Integrations</strong> dashboard page
+(<span class="guilabel">Admin</span> &gt; <span class="guilabel">Integrations</span>).</p>
+</dd>
+<dt>default_branch</dt><dd><p>This is the default branch of the repository
+(ie. the one checked out when cloning the repository without arguments)</p>
+<p><em>Optional</em></p>
+</dd>
+</dl>
+<p>For example, the cURL command to build the <code class="docutils literal notranslate"><span class="pre">dev</span></code> branch, using the token
+<code class="docutils literal notranslate"><span class="pre">1234</span></code>, would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">X</span> <span class="n">POST</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;branches=dev&quot;</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;token=1234&quot;</span> <span class="o">-</span><span class="n">d</span> <span class="s2">&quot;default_branch=main&quot;</span>
+<span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">readthedocs</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v2</span><span class="o">/</span><span class="n">webhook</span><span class="o">/</span><span class="n">example</span><span class="o">-</span><span class="n">project</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span>
+</pre></div>
+</div>
+<p>A command like the one above could be called from a cron job or from a hook
+inside <a class="reference external" href="http://www.kernel.org/pub/software/scm/git/docs/githooks.html">Git</a>, <a class="reference external" href="https://www.mikewest.org/2006/06/subversion-post-commit-hooks-101">Subversion</a>, <a class="reference external" href="http://hgbook.red-bean.com/read/handling-repository-events-with-hooks.html">Mercurial</a>, or <a class="reference external" href="http://wiki.bazaar.canonical.com/BzrHooks">Bazaar</a>.</p>
+</section>
+<section id="authentication">
+<h3>Authentication<a class="headerlink" href="#authentication" title="Link to this heading"></a></h3>
+<p>This endpoint requires authentication. If authenticating with an integration
+token, a check will determine if the token is valid and matches the given
+project. If instead an authenticated user is used to make this request, a check
+will be performed to ensure the authenticated user is an owner of the project.</p>
+</section>
+</section>
+<section id="payload-validation">
+<h2>Payload validation<a class="headerlink" href="#payload-validation" title="Link to this heading"></a></h2>
+<p>All integrations are created with a secret token,
+this offers a way to verify that a webhook request is legitimate.</p>
+<p>This validation is done according to each provider:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://developer.github.com/webhooks/securing/">GitHub</a></p></li>
+<li><p><a class="reference external" href="https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#validate-payloads-by-using-a-secret-token">GitLab</a></p></li>
+<li><p><a class="reference external" href="https://support.atlassian.com/bitbucket-cloud/docs/manage-webhooks/#Secure-webhooks">Bitbucket</a></p></li>
+</ul>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading"></a></h2>
+<section id="debugging-webhooks">
+<h3>Debugging webhooks<a class="headerlink" href="#debugging-webhooks" title="Link to this heading"></a></h3>
+<p>If you are experiencing problems with an existing webhook, you may be able to
+use the integration detail page to help debug the issue. Each project
+integration, such as a webhook or the generic API endpoint, stores the HTTP
+exchange that takes place between Read the Docs and the external source. You’ll
+find a list of these exchanges in any of the integration detail pages.</p>
+</section>
+<section id="webhook-activation-failed-make-sure-you-have-the-necessary-permissions">
+<h3>Webhook activation failed. Make sure you have the necessary permissions<a class="headerlink" href="#webhook-activation-failed-make-sure-you-have-the-necessary-permissions" title="Link to this heading"></a></h3>
+<p>If you find this error,
+make sure your user has permissions over the repository.
+In case of GitHub,
+check that you have granted access to the Read the Docs <a class="reference external" href="https://github.com/settings/applications">OAuth App</a> to your organization.</p>
+</section>
+<section id="my-project-isn-t-automatically-building">
+<h3>My project isn’t automatically building<a class="headerlink" href="#my-project-isn-t-automatically-building" title="Link to this heading"></a></h3>
+<p>If your project isn’t automatically building, you can check your integration on
+Read the Docs to see the payload sent to our servers. If there is no recent
+activity on your Read the Docs project webhook integration, then it’s likely
+that your VCS provider is not configured correctly. If there is payload
+information on your Read the Docs project, you might need to verify that your
+versions are configured to build correctly.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+  <div id="rtd-stickybox-container">
+  <div class="raised" data-ea-publisher="readthedocs" data-ea-type="image" data-ea-style="stickybox"></div>
+</div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="git-repo-automatic.html" class="btn btn-neutral float-left" title="How to automatically configure a Git repository" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../custom-domains.html" class="btn btn-neutral float-right" title="How to manage custom domains" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Read the Docs, Inc &amp; contributors.
+      <span class="commit">Revision <code>6747f91a</code>.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- This style is injected ONLY on Read the Docs and it's missing. -->
+<style>
+ .rtd-current-item {
+   font-weight: bold;
+ }
+</style>
+
+<script type="text/javascript">
+ function renderLanguages(config) {
+   if (!config.projects.translations.length) {
+     return "";
+   }
+
+   const languagesHTML = `
+     <dl>
+       <dt>Languages</dt>
+       ${ config.projects.translations.map(
+       (translation) => `
+       <dd ${ translation.slug == config.projects.current.slug ? 'class="rtd-current-item"' : '' }>
+         <a href="${ translation.urls.documentation }">${ translation.language.code }</a>
+       </dd>
+       `).join("\n")}
+     </dl>
+   `;
+   return languagesHTML;
+ }
+
+  function renderVersions(config) {
+    if (!config.versions.active.length) {
+      return "";
+    }
+    const versionsHTML = `
+      <dl>
+        <dt>Versions</dt>
+        ${ config.versions.active.map(
+        (version) => `
+        <dd ${ version.slug === config.versions.current.slug ? 'class="rtd-current-item"' : '' }>
+          <a href="${ version.urls.documentation }">${ version.slug }</a>
+        </dd>
+        `).join("\n")}
+      </dl>
+    `;
+    return versionsHTML;
+  }
+
+  function renderDownloads(config) {
+    if (!Object.keys(config.versions.current.downloads).length) {
+      return "";
+    }
+    const downloadsNameDisplay = {
+      pdf: "PDF",
+      epub: "Epub",
+      htmlzip: "HTML",
+    };
+
+    const downloadsHTML = `
+      <dl>
+        <dt>Downloads</dt>
+        ${ Object.entries(config.versions.current.downloads).map(
+        ([name, url]) => `
+          <dd>
+            <a href="${ url }">${ downloadsNameDisplay[name] }</a>
+          </dd>
+        `).join("\n")}
+      </dl>
+    `;
+    return downloadsHTML;
+  }
+
+  document.addEventListener("readthedocs-addons-data-ready", function(event) {
+    const config = event.detail.data();
+
+    const flyout = `
+      <div class="rst-versions" data-toggle="rst-versions" role="note">
+        <span class="rst-current-version" data-toggle="rst-current-version">
+          <span class="fa fa-book"> Read the Docs</span>
+          v: ${ config.versions.current.slug }
+          <span class="fa fa-caret-down"></span>
+        </span>
+        <div class="rst-other-versions">
+          <div class="injected">
+            ${ renderLanguages(config) }
+            ${ renderVersions(config) }
+            ${ renderDownloads(config) }
+            <dl>
+              <dt>On Read the Docs</dt>
+              <dd>
+                <a href="${ config.projects.current.urls.home }">Project Home</a>
+              </dd>
+              <dd>
+                <a href="${ config.projects.current.urls.builds }">Builds</a>
+              </dd>
+              <dd>
+                <a href="${ config.projects.current.urls.downloads }">Downloads</a>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Search</dt>
+              <dd>
+                <div style="padding: 6px;">
+                  <form id="flyout-search-form">
+                    <input
+                      class="wy-form"
+                      type="text"
+                      name="q"
+                      aria-label="Search docs"
+                      placeholder="Search docs"
+                      />
+                  </form>
+                </div>
+              </dd>
+            </dl>
+            <hr />
+            <small>
+              <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+              <span> &middot; </span>
+              <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+            </small>
+          </div>
+        </div>
+    `;
+
+    // Inject the generated flyout into the body HTML element.
+    document.body.insertAdjacentHTML("beforeend", flyout);
+
+    // Trigger the Read the Docs Addons Search modal when clicking on the "Search" form from inside the flyout.
+    document.querySelector("#flyout-search-form").addEventListener("focusin", () => {
+      const event = new CustomEvent("readthedocs-search-show");
+      document.dispatchEvent(event);
+    });
+ });
+</script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
