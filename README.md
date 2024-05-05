@@ -6,10 +6,11 @@ Lessons:
 1. Building Vector Storage:
 This covers how to ingest documents into Chroma. It skips over text splitting, embeddings, and pre-processing functions because those will be covered in subsequent lessons
 
-Coming up...
+2. Text Splitting:
+This covers a few examples for text splitters and ingesting them into Chroma
 
-2. Text Splitting
+Coming up...
 
 3. Embeddings
    
-5. Pre-processing techniques and query optimization
+4. Pre-processing techniques and query optimization
