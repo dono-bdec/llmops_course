@@ -1,0 +1,668 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="readthedocs-addons-api-version" content="1"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="How to setup build status webhooks" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://docs.readthedocs.io/en/stable/guides/build/webhooks.html" />
+<meta property="og:site_name" content="Read the Docs Documentation" />
+<meta property="og:description" content="In this guide, you can learn how to setup build notifications via webhooks. When a documentation build is triggered, successful or failed, Read the Docs can notify external APIs using webhooks. In that way, you can receive build notifications in your own monitoring channels and be alerted you whe..." />
+<meta property="og:image" content="https://docs.readthedocs.io/en/stable/_images/webhooks-events.png" />
+<meta property="og:image:alt" content="URL and events for a webhook" />
+<meta name="description" content="In this guide, you can learn how to setup build notifications via webhooks. When a documentation build is triggered, successful or failed, Read the Docs can notify external APIs using webhooks. In that way, you can receive build notifications in your own monitoring channels and be alerted you whe..." />
+<meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to setup build status webhooks &mdash; Read the Docs user documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx_rtd_theme.css?v=3234e928" />
+      <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=da32ccdd" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/sphinx_prompt_css.css?v=351d85e3" />
+
+  
+    <link rel="canonical" href="https://docs.readthedocs.io/en/stable/guides/build/webhooks.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=1de9cf8b"></script>
+      <script src="../../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/js/hoverxref.js"></script>
+      <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+      <script src="../../_static/js/micromodal.min.js"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../../_static/design-tabs.js?v=36754332"></script>
+      <script src="../../_static/js/rtd_search_config.js"></script>
+      <script src="../../_static/js/rtd_sphinx_search.min.js"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+      <script src="../../_static/js/expand_tabs.js?v=1e151f68"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to configure pull request builds" href="../pull-requests.html" />
+    <link rel="prev" title="How to setup email notifications" href="email-notifications.html" />
+   
+
+  
+  <script defer data-domain="docs.readthedocs.io" src="https://plausible.io/js/script.js"></script>
+  
+
+
+<!-- RTD Extra Head -->
+
+
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/user/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "guides/build/webhooks", "programming_language": "py", "project": "docs", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "UA-17997319-6", "version": "stable"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+
+
+<!-- end RTD <extrahead> -->
+<script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="docs" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/guides/build/webhooks.html" /></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Read the Docs tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../choosing-a-site.html">Choosing between our two platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro/getting-started-with-sphinx.html">Getting started with Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro/getting-started-with-mkdocs.html">Getting started with MkDocs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../intro/import-guide.html">Importing your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../examples.html">Example projects</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project setup and configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../config-file/index.html">Configuration file overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../config-file/v2.html">Configuration file reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../automation-rules.html">Automation rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reproducible-builds.html">How to create reproducible builds</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Build process</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../builds.html">Build process overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build-customization.html">Build process customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/git-integration.html">Git integration (GitHub, GitLab, Bitbucket)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../pull-requests.html">Pull request previews</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../build-notifications.html">Build failure notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../environment-variables.html">Environment variable overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/environment-variables.html">Environment variable reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hosting documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../subprojects.html">Subprojects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../localization.html">Localization and Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versioning-schemes.html">URL versioning schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../custom-domains.html">Custom domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../canonical-urls.html">Canonical URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/cdn.html">Content Delivery Network (CDN) and caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/sitemaps.html"><code class="docutils literal notranslate"><span class="pre">sitemap.xml</span></code> support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/404-not-found.html"><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/robots.html"><code class="docutils literal notranslate"><span class="pre">robots.txt</span></code> support</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reading documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../downloadable-documentation.html">Offline formats (PDF, ePub, HTML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../embedding-content.html">How to embed content from your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server-side-search/index.html">Server side search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../server-side-search/syntax.html">Search query syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../flyout-menu.html">Flyout menu</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Maintaining projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../user-defined-redirects.html">Redirects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/analytics.html">Analytics for search and traffic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security-log.html">Security logs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../badges.html">Status badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../explanation/documentation-structure.html">How to structure your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../best-practice/links.html">Best practices for linking to your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security-implications.html">Security considerations for documentation pages</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Business features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/index.html">Business hosting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/organizations.html">Organizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/single-sign-on.html">Single Sign-On (SSO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/sharing.html">Sharing private documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commercial/subscriptions.html">How to manage your subscription</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../setup/index.html">Project setup and configuration</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Build process</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="email-notifications.html">Setup email notifications</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setup webhook notifications</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#build-status-webhooks">Build status webhooks</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom-payload-examples">Custom payload examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#variable-substitutions-reference">Variable substitutions reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#validating-the-payload">Validating the payload</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#legacy-webhooks">Legacy webhooks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#troubleshooting-webhooks-and-payload-discovery">Troubleshooting webhooks and payload discovery</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../pull-requests.html">Configuring pull request builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../environment-variables.html">Using custom environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../automation-rules.html">Managing versions automatically</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../maintenance/index.html">Upgrading and maintaining projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../content/index.html">Content, themes and SEO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../access/index.html">Security and access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../management/index.html">Account management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../best-practice/index.html">Best practice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting/index.html">Troubleshooting problems</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../api/index.html">Public REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about/index.html">About Read the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://dev.readthedocs.io">Developer Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Read the Docs user documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">How-to guides: build process</a></li>
+      <li class="breadcrumb-item active">How to setup build status webhooks</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/readthedocs/readthedocs.org/blob/6747f91a440937e2b5088e9168ad1b87d6611129/docs/user/guides/build/webhooks.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  
+           <div itemprop="articleBody">
+             
+  <section id="how-to-setup-build-status-webhooks">
+<h1>How to setup build status webhooks<a class="headerlink" href="#how-to-setup-build-status-webhooks" title="Link to this heading"></a></h1>
+<p>In this guide,
+you can learn how to setup build notifications via webhooks.</p>
+<p>When a documentation build is <em>triggered</em>, <em>successful</em> or <em>failed</em>,
+Read the Docs can notify external APIs using <a class="hxr-hoverxref hxr-tooltip reference internal" href="../../glossary.html#term-webhook"><span class="xref std std-term">webhooks</span></a>.
+In that way,
+you can receive build notifications in your own monitoring channels and be alerted you when your builds fail so you can take immediate action.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="email-notifications.html"><span class="doc">How to setup email notifications</span></a></dt><dd><p>Setup basic email notifications for build failures.</p>
+</dd>
+<dt><a class="reference internal" href="../../pull-requests.html"><span class="doc">Pull request previews</span></a></dt><dd><p>Configure automated feedback and documentation site previews for your pull requests.</p>
+</dd>
+</dl>
+</div>
+<section id="build-status-webhooks">
+<h2>Build status webhooks<a class="headerlink" href="#build-status-webhooks" title="Link to this heading"></a></h2>
+<p>Take these steps to enable build notifications using a webhook:</p>
+<ul class="simple">
+<li><p>Go to <span class="menuselection">Admin ‣ Webhooks</span> in your project.</p></li>
+<li><p>Fill in the <strong>URL</strong> field and select what events will trigger the webhook</p></li>
+<li><p>Modify the payload or leave the default (see below)</p></li>
+<li><p>Click on <span class="guilabel">Save</span></p></li>
+</ul>
+<figure class="align-center" id="id1">
+<img alt="URL and events for a webhook" src="../../_images/webhooks-events.png" />
+<figcaption>
+<p><span class="caption-text">URL and events for a webhook</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>Every time one of the checked events triggers,
+Read the Docs will send a POST request to your webhook URL.
+The default payload will look like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;event&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;build:triggered&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;slug&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;docs&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;latest&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;commit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2552bb609ca46865dc36401dee0b1865a0aee52d&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;15173336&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;start_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2021-11-03T16:23:14&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://readthedocs.org/projects/docs/builds/15173336/&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;docs_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://docs.readthedocs.io/en/latest/&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When a webhook is sent, a new entry will be added to the
+“Recent Activity” table. By clicking on each individual entry,
+you will see the server response, the webhook request, and the payload.</p>
+<figure class="align-center" id="id2">
+<img alt="Activity of a webhook" src="../../_images/webhooks-activity.png" />
+<figcaption>
+<p><span class="caption-text">Activity of a webhook</span><a class="headerlink" href="#id2" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We don’t trigger <a class="hxr-hoverxref hxr-tooltip reference internal" href="../../glossary.html#term-webhook"><span class="xref std std-term">webhooks</span></a> on <a class="reference internal" href="../../pull-requests.html"><span class="doc">builds from pull requests</span></a>.</p>
+</div>
+<section id="custom-payload-examples">
+<h3>Custom payload examples<a class="headerlink" href="#custom-payload-examples" title="Link to this heading"></a></h3>
+<p>You can customize the payload of the webhook to suit your needs,
+as long as it is valid JSON. Below you have a couple of examples,
+and in the following section you will find all the available variables.</p>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="../../_images/webhooks-payload.png"><img alt="Custom payload" src="../../_images/webhooks-payload.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Custom payload</span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Slack</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Discord</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;attachments&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;#db3238&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;blocks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;section&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Read the Docs build failed*&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;section&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Project*: &lt;{{ project.url }}|{{ project.name }}&gt;&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Version*: {{ version.name }} ({{ build.commit }})&quot;</span>
+<span class="w">            </span><span class="p">},</span>
+<span class="w">            </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mrkdwn&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">&quot;text&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Build*: &lt;{{ build.url }}|{{ build.id }}&gt;&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>More information on <a class="reference external" href="https://api.slack.com/messaging/webhooks">the Slack Incoming Webhooks documentation</a>.</p>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;username&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Read the Docs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;content&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Read the Docs build failed&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;embeds&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;title&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Build logs&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ build.url }}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;color&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">15258703</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;fields&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Project*&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ project.url }}&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;inline&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Version*&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ version.name }} ({{ build.commit }})&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;inline&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;*Build*&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ build.url }}&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>More information on <a class="reference external" href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks">the Discord webhooks documentation</a>.</p>
+</div></div>
+</section>
+<section id="variable-substitutions-reference">
+<h3>Variable substitutions reference<a class="headerlink" href="#variable-substitutions-reference" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">event</span> <span class="pre">}}</span></code></dt><dd><p>Event that triggered the webhook, one of <code class="docutils literal notranslate"><span class="pre">build:triggered</span></code>, <code class="docutils literal notranslate"><span class="pre">build:failed</span></code>, or <code class="docutils literal notranslate"><span class="pre">build:passed</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">build.id</span> <span class="pre">}}</span></code></dt><dd><p>Build ID.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">build.commit</span> <span class="pre">}}</span></code></dt><dd><p>Commit corresponding to the build, if present (otherwise <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code>).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">build.url</span> <span class="pre">}}</span></code></dt><dd><p>URL of the build, for example <code class="docutils literal notranslate"><span class="pre">https://readthedocs.org/projects/docs/builds/15173336/</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">build.docs_url</span> <span class="pre">}}</span></code></dt><dd><p>URL of the documentation corresponding to the build,
+for example <code class="docutils literal notranslate"><span class="pre">https://docs.readthedocs.io/en/latest/</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">build.start_date</span> <span class="pre">}}</span></code></dt><dd><p>Start date of the build (UTC, ISO format), for example <code class="docutils literal notranslate"><span class="pre">2021-11-03T16:23:14</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">organization.name</span> <span class="pre">}}</span></code></dt><dd><p>Organization name (Commercial only).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">organization.slug</span> <span class="pre">}}</span></code></dt><dd><p>Organization slug (Commercial only).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">project.slug</span> <span class="pre">}}</span></code></dt><dd><p>Project slug.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">project.name</span> <span class="pre">}}</span></code></dt><dd><p>Project name.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">project.url</span> <span class="pre">}}</span></code></dt><dd><p>URL of the project <a class="hxr-hoverxref hxr-tooltip reference internal" href="../../glossary.html#term-dashboard"><span class="xref std std-term">dashboard</span></a>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">version.slug</span> <span class="pre">}}</span></code></dt><dd><p>Version slug.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">version.name</span> <span class="pre">}}</span></code></dt><dd><p>Version name.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="validating-the-payload">
+<h2>Validating the payload<a class="headerlink" href="#validating-the-payload" title="Link to this heading"></a></h2>
+<p>After you add a new webhook, Read the Docs will generate a secret key for it
+and uses it to generate a hash signature (HMAC-SHA256) for each payload
+that is included in the <code class="docutils literal notranslate"><span class="pre">X-Hub-Signature</span></code> header of the request.</p>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="../../_images/webhooks-secret.png"><img alt="Webhook secret" src="../../_images/webhooks-secret.png" style="width: 80%;" /></a>
+<figcaption>
+<p><span class="caption-text">Webhook secret</span><a class="headerlink" href="#id4" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+<p>We highly recommend using this signature
+to verify that the webhook is coming from Read the Docs.
+To do so, you can add some custom code on your server,
+like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">hmac</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="k">def</span> <span class="nf">verify_signature</span><span class="p">(</span><span class="n">payload</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Verify that the signature of payload is the same as the one coming from request_headers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">digest</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span>
+        <span class="n">key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;WEBHOOK_SECRET&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+        <span class="n">msg</span><span class="o">=</span><span class="n">payload</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+        <span class="n">digestmod</span><span class="o">=</span><span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">expected_signature</span> <span class="o">=</span> <span class="n">digest</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">hmac</span><span class="o">.</span><span class="n">compare_digest</span><span class="p">(</span>
+        <span class="n">request_headers</span><span class="p">[</span><span class="s2">&quot;X-Hub-Signature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+        <span class="n">expected_signature</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="legacy-webhooks">
+<h2>Legacy webhooks<a class="headerlink" href="#legacy-webhooks" title="Link to this heading"></a></h2>
+<p>Webhooks created before the custom payloads functionality was added to Read the Docs
+send a payload with the following structure:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Read the Docs&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;slug&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rtd&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6321373</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;commit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;e8dd17a3f1627dd206d721e4be08ae6766fda40&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;finished&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;success&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2017-02-15 20:35:54&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To migrate to the new webhooks and keep a similar structure,
+you can use this payload:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ project.name }}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;slug&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ project.slug }}&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;build&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ build.id }}&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;commit&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ build.commit }}&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;state&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ event }}&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{{ build.start_date }}&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting-webhooks-and-payload-discovery">
+<h2>Troubleshooting webhooks and payload discovery<a class="headerlink" href="#troubleshooting-webhooks-and-payload-discovery" title="Link to this heading"></a></h2>
+<p>You can use public tools to discover, inspect and test webhook
+integration. These tools act as catch-all endpoints for HTTP requests
+and respond with a 200 OK HTTP status code. You can use these payloads
+to develop your webhook services. You should exercise caution when using
+these tools as you might be sending sensitive data to external tools.</p>
+<p>These public tools include:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://beeceptor.com/webhook-integration/">Beeceptor</a> to create
+a temporary HTTPS endpoint and inspect incoming payloads. It lets you
+respond custom response code or messages from named HTTP mock server.</p></li>
+<li><p><a class="reference external" href="https://webhook-test.com/">Webhook Tester</a> to inspect and debug
+incoming payloads. It lets you inspect all incoming requests to it’s
+URL/bucket.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+  <div id="rtd-stickybox-container">
+  <div class="raised" data-ea-publisher="readthedocs" data-ea-type="image" data-ea-style="stickybox"></div>
+</div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="email-notifications.html" class="btn btn-neutral float-left" title="How to setup email notifications" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../pull-requests.html" class="btn btn-neutral float-right" title="How to configure pull request builds" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Read the Docs, Inc &amp; contributors.
+      <span class="commit">Revision <code>6747f91a</code>.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- This style is injected ONLY on Read the Docs and it's missing. -->
+<style>
+ .rtd-current-item {
+   font-weight: bold;
+ }
+</style>
+
+<script type="text/javascript">
+ function renderLanguages(config) {
+   if (!config.projects.translations.length) {
+     return "";
+   }
+
+   const languagesHTML = `
+     <dl>
+       <dt>Languages</dt>
+       ${ config.projects.translations.map(
+       (translation) => `
+       <dd ${ translation.slug == config.projects.current.slug ? 'class="rtd-current-item"' : '' }>
+         <a href="${ translation.urls.documentation }">${ translation.language.code }</a>
+       </dd>
+       `).join("\n")}
+     </dl>
+   `;
+   return languagesHTML;
+ }
+
+  function renderVersions(config) {
+    if (!config.versions.active.length) {
+      return "";
+    }
+    const versionsHTML = `
+      <dl>
+        <dt>Versions</dt>
+        ${ config.versions.active.map(
+        (version) => `
+        <dd ${ version.slug === config.versions.current.slug ? 'class="rtd-current-item"' : '' }>
+          <a href="${ version.urls.documentation }">${ version.slug }</a>
+        </dd>
+        `).join("\n")}
+      </dl>
+    `;
+    return versionsHTML;
+  }
+
+  function renderDownloads(config) {
+    if (!Object.keys(config.versions.current.downloads).length) {
+      return "";
+    }
+    const downloadsNameDisplay = {
+      pdf: "PDF",
+      epub: "Epub",
+      htmlzip: "HTML",
+    };
+
+    const downloadsHTML = `
+      <dl>
+        <dt>Downloads</dt>
+        ${ Object.entries(config.versions.current.downloads).map(
+        ([name, url]) => `
+          <dd>
+            <a href="${ url }">${ downloadsNameDisplay[name] }</a>
+          </dd>
+        `).join("\n")}
+      </dl>
+    `;
+    return downloadsHTML;
+  }
+
+  document.addEventListener("readthedocs-addons-data-ready", function(event) {
+    const config = event.detail.data();
+
+    const flyout = `
+      <div class="rst-versions" data-toggle="rst-versions" role="note">
+        <span class="rst-current-version" data-toggle="rst-current-version">
+          <span class="fa fa-book"> Read the Docs</span>
+          v: ${ config.versions.current.slug }
+          <span class="fa fa-caret-down"></span>
+        </span>
+        <div class="rst-other-versions">
+          <div class="injected">
+            ${ renderLanguages(config) }
+            ${ renderVersions(config) }
+            ${ renderDownloads(config) }
+            <dl>
+              <dt>On Read the Docs</dt>
+              <dd>
+                <a href="${ config.projects.current.urls.home }">Project Home</a>
+              </dd>
+              <dd>
+                <a href="${ config.projects.current.urls.builds }">Builds</a>
+              </dd>
+              <dd>
+                <a href="${ config.projects.current.urls.downloads }">Downloads</a>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Search</dt>
+              <dd>
+                <div style="padding: 6px;">
+                  <form id="flyout-search-form">
+                    <input
+                      class="wy-form"
+                      type="text"
+                      name="q"
+                      aria-label="Search docs"
+                      placeholder="Search docs"
+                      />
+                  </form>
+                </div>
+              </dd>
+            </dl>
+            <hr />
+            <small>
+              <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+              <span> &middot; </span>
+              <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+            </small>
+          </div>
+        </div>
+    `;
+
+    // Inject the generated flyout into the body HTML element.
+    document.body.insertAdjacentHTML("beforeend", flyout);
+
+    // Trigger the Read the Docs Addons Search modal when clicking on the "Search" form from inside the flyout.
+    document.querySelector("#flyout-search-form").addEventListener("focusin", () => {
+      const event = new CustomEvent("readthedocs-search-show");
+      document.dispatchEvent(event);
+    });
+ });
+</script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

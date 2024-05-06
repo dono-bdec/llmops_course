@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="readthedocs-addons-api-version" content="1"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="How to deprecate content" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://docs.readthedocs.io/en/stable/guides/deprecating-content.html" />
+<meta property="og:site_name" content="Read the Docs Documentation" />
+<meta property="og:description" content="When you deprecate a feature from your project, you may want to deprecate its docs as well, and stop your users from reading that content. Deprecating content may sound as easy as delete it, but doing that will break existing links, and you don’t necessary want to make the content inaccessible. H..." />
+<meta property="og:image" content="https://docs.readthedocs.io/en/latest/_static/img/logo-opengraph.png" />
+<meta property="og:image:alt" content="Read the Docs Documentation" />
+<meta name="description" content="When you deprecate a feature from your project, you may want to deprecate its docs as well, and stop your users from reading that content. Deprecating content may sound as easy as delete it, but doing that will break existing links, and you don’t necessary want to make the content inaccessible. H..." />
+<meta name="twitter:card" content="summary_large_image" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to deprecate content &mdash; Read the Docs user documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/sphinx_rtd_theme.css?v=3234e928" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+      <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/rtd_sphinx_search.min.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=da32ccdd" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/sphinx_prompt_css.css?v=351d85e3" />
+
+  
+    <link rel="canonical" href="https://docs.readthedocs.io/en/stable/guides/deprecating-content.html" />
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=1de9cf8b"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/js/hoverxref.js"></script>
+      <script src="../_static/js/tooltipster.bundle.min.js"></script>
+      <script src="../_static/js/micromodal.min.js"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/tabs.js?v=3030b3cb"></script>
+      <script src="../_static/design-tabs.js?v=36754332"></script>
+      <script src="../_static/js/rtd_search_config.js"></script>
+      <script src="../_static/js/rtd_sphinx_search.min.js"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+      <script src="../_static/js/expand_tabs.js?v=1e151f68"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="How-to guides: troubleshooting problems" href="troubleshooting/index.html" />
+    <link rel="prev" title="How-to guides: best practices" href="best-practice/index.html" />
+   
+
+  
+  <script defer data-domain="docs.readthedocs.io" src="https://plausible.io/js/script.js"></script>
+  
+
+
+<!-- RTD Extra Head -->
+
+
+
+<script type="application/json" id="READTHEDOCS_DATA">{"ad_free": false, "api_host": "https://readthedocs.org", "builder": "sphinx", "canonical_url": null, "docroot": "/docs/user/", "features": {"docsearch_disabled": false}, "global_analytics_code": "UA-17997319-1", "language": "en", "page": "guides/deprecating-content", "programming_language": "py", "project": "docs", "proxied_api_host": "/_", "source_suffix": ".rst", "subprojects": {}, "theme": "sphinx_rtd_theme", "user_analytics_code": "UA-17997319-6", "version": "stable"}</script>
+
+<!--
+Using this variable directly instead of using `JSON.parse` is deprecated.
+The READTHEDOCS_DATA global variable will be removed in the future.
+-->
+<script type="text/javascript">
+READTHEDOCS_DATA = JSON.parse(document.getElementById('READTHEDOCS_DATA').innerHTML);
+</script>
+
+
+
+<!-- end RTD <extrahead> -->
+<script async type="text/javascript" src="/_/static/javascript/readthedocs-addons.js"></script><meta name="readthedocs-project-slug" content="docs" /><meta name="readthedocs-version-slug" content="stable" /><meta name="readthedocs-resolver-filename" content="/guides/deprecating-content.html" /></head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Read the Docs tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../choosing-a-site.html">Choosing between our two platforms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/getting-started-with-sphinx.html">Getting started with Sphinx</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/getting-started-with-mkdocs.html">Getting started with MkDocs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../intro/import-guide.html">Importing your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Example projects</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Project setup and configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../config-file/index.html">Configuration file overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../config-file/v2.html">Configuration file reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../automation-rules.html">Automation rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reproducible-builds.html">How to create reproducible builds</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Build process</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../builds.html">Build process overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-customization.html">Build process customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/git-integration.html">Git integration (GitHub, GitLab, Bitbucket)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pull-requests.html">Pull request previews</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../build-notifications.html">Build failure notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../environment-variables.html">Environment variable overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/environment-variables.html">Environment variable reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Hosting documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../subprojects.html">Subprojects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../localization.html">Localization and Internationalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versioning-schemes.html">URL versioning schemes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../custom-domains.html">Custom domains</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../canonical-urls.html">Canonical URLs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/cdn.html">Content Delivery Network (CDN) and caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/sitemaps.html"><code class="docutils literal notranslate"><span class="pre">sitemap.xml</span></code> support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/404-not-found.html"><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> pages</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/robots.html"><code class="docutils literal notranslate"><span class="pre">robots.txt</span></code> support</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reading documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../downloadable-documentation.html">Offline formats (PDF, ePub, HTML)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="embedding-content.html">How to embed content from your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server-side-search/index.html">Server side search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../server-side-search/syntax.html">Search query syntax</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../flyout-menu.html">Flyout menu</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Maintaining projects</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../user-defined-redirects.html">Redirects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/analytics.html">Analytics for search and traffic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-log.html">Security logs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../badges.html">Status badges</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../explanation/documentation-structure.html">How to structure your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="best-practice/links.html">Best practices for linking to your documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security-implications.html">Security considerations for documentation pages</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Business features</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../commercial/index.html">Business hosting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commercial/organizations.html">Organizations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commercial/single-sign-on.html">Single Sign-On (SSO)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commercial/sharing.html">Sharing private documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commercial/subscriptions.html">How to manage your subscription</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">How-to guides</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="setup/index.html">Project setup and configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build/index.html">Build process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="maintenance/index.html">Upgrading and maintaining projects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="content/index.html">Content, themes and SEO</a></li>
+<li class="toctree-l1"><a class="reference internal" href="access/index.html">Security and access</a></li>
+<li class="toctree-l1"><a class="reference internal" href="management/index.html">Account management</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="best-practice/index.html">Best practice</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Deprecating content</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#deprecating-versions">Deprecating versions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#deprecating-pages">Deprecating pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#moving-and-deleting-pages">Moving and deleting pages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="best-practice/links.html">Best practices for linking to your documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducible-builds.html">Creating reproducible builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-docs-seo-guide.html">Search engine optimization (SEO) for documentation projects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hiding-a-version.html">Hiding a version</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting/index.html">Troubleshooting problems</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/index.html">Public REST API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/index.html">About Read the Docs</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://dev.readthedocs.io">Developer Documentation</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Read the Docs user documentation</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="best-practice/index.html">How-to guides: best practices</a></li>
+      <li class="breadcrumb-item active">How to deprecate content</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/readthedocs/readthedocs.org/blob/6747f91a440937e2b5088e9168ad1b87d6611129/docs/user/guides/deprecating-content.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  
+           <div itemprop="articleBody">
+             
+  <section id="how-to-deprecate-content">
+<h1>How to deprecate content<a class="headerlink" href="#how-to-deprecate-content" title="Link to this heading"></a></h1>
+<p>When you deprecate a feature from your project,
+you may want to deprecate its docs as well,
+and stop your users from reading that content.</p>
+<p>Deprecating content may sound as easy as delete it,
+but doing that will break existing links,
+and you don’t necessary want to make the content inaccessible.
+Here you’ll find some tips on how to use Read the Docs to deprecate your content
+progressively and in non harmful ways.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="best-practice/links.html"><span class="doc">Best practices for linking to your documentation</span></a></dt><dd><p>More information about handling URL structures, renaming and removing content.</p>
+</dd>
+</dl>
+</div>
+<section id="deprecating-versions">
+<h2>Deprecating versions<a class="headerlink" href="#deprecating-versions" title="Link to this heading"></a></h2>
+<p>If you have multiple versions of your project,
+it makes sense to have its <a class="reference internal" href="../versions.html"><span class="doc">documentation versioned</span></a> as well.
+For example, if you have the following versions and want to deprecate v1.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">https://project.readthedocs.io/en/v1/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">https://project.readthedocs.io/en/v2/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">https://project.readthedocs.io/en/v3/</span></code></p></li>
+</ul>
+<p>For cases like this you can <em>hide</em> a version.
+Hidden versions won’t be listed in the versions menu of your docs,
+and they will be listed in a <a class="reference internal" href="../reference/robots.html"><span class="doc">robots.txt file</span></a>
+to stop search engines of showing results for that version.</p>
+<p>Users can still see all versions in the dashboard of your project.
+To hide a version go to your project and click on <span class="guilabel">Versions</span> &gt; <span class="guilabel">Edit</span>,
+and mark the <span class="guilabel">Hidden</span> option. Check <a class="hxr-hoverxref hxr-tooltip reference internal" href="../versions.html#version-states"><span class="std std-ref">Version states</span></a> for more information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the versions of your project follow the <a class="reference external" href="https://semver.org/">semver</a> convention,
+you can activate the <a class="hxr-hoverxref hxr-tooltip reference internal" href="../versions.html#version-warning"><span class="std std-ref">Version warning</span></a> option for your project.
+A banner with a warning and linking to the stable version
+will be shown on all versions that are lower than the stable one.</p>
+</div>
+</section>
+<section id="deprecating-pages">
+<h2>Deprecating pages<a class="headerlink" href="#deprecating-pages" title="Link to this heading"></a></h2>
+<p>You may not always want to deprecate a version, but deprecate some pages.
+For example, if you have documentation about two APIs and you want to deprecate v1:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">https://project.readthedocs.io/en/latest/api/v1.html</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">https://project.readthedocs.io/en/latest/api/v2.html</span></code></p></li>
+</ul>
+<p>A simple way is just adding a warning at the top of the page,
+this will warn users visiting that page,
+but it won’t stop users from being redirected to that page from search results.
+You can add an entry of that page in a <a class="reference internal" href="../reference/robots.html"><span class="doc">custom robots.txt</span></a> file
+to avoid search engines of showing those results. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># robots.txt</span>
+
+<span class="n">User</span><span class="o">-</span><span class="n">agent</span><span class="p">:</span> <span class="o">*</span>
+
+<span class="n">Disallow</span><span class="p">:</span> <span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">.</span><span class="n">html</span> <span class="c1"># Deprecated API</span>
+</pre></div>
+</div>
+<p>But your users will still see search results from that page if they use the search from your docs.
+With Read the Docs you can set a <a class="hxr-hoverxref hxr-tooltip reference internal" href="../config-file/v2.html#search-ranking"><span class="std std-ref">custom rank per pages</span></a>.
+For example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># .readthedocs.yaml</span>
+
+<span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<span class="nt">search</span><span class="p">:</span>
+<span class="w">   </span><span class="nt">ranking</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">api/v1.html</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span>
+</pre></div>
+</div>
+<p>This won’t hide results from that page, but it will give priority to results from other pages.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can make use of Sphinx <a class="hxr-hoverxref hxr-tooltip reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html" title="(in Sphinx v7.4.0)"><span class="xref std std-doc">directives</span></a>
+(like <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">deprecated</span></code>, <code class="docutils literal notranslate"><span class="pre">versionchanged</span></code>)
+or MkDocs <a class="reference external" href="https://python-markdown.github.io/extensions/admonition/">admonitions</a>
+to warn your users about deprecated content.</p>
+</div>
+</section>
+<section id="moving-and-deleting-pages">
+<h2>Moving and deleting pages<a class="headerlink" href="#moving-and-deleting-pages" title="Link to this heading"></a></h2>
+<p>After you have deprecated a feature for a while,
+you may want to get rid of its documentation,
+that’s OK, you don’t have to maintain that content forever.
+But be aware that users may have links of that page saved,
+and it will be frustrating and confusing for them to get a 404.</p>
+<p>To solve that problem you can create a redirect to a page with a similar feature/content,
+like redirecting to the docs of the v2 of your API when your users visit the deleted docs from v1,
+this is a <a class="hxr-hoverxref hxr-tooltip reference internal" href="../user-defined-redirects.html#id2"><span class="std std-ref">page redirect</span></a> from <code class="docutils literal notranslate"><span class="pre">/api/v1.html</span></code> to <code class="docutils literal notranslate"><span class="pre">/api/v2.html</span></code>.
+See <a class="reference internal" href="../user-defined-redirects.html"><span class="doc">Redirects</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+  <div id="rtd-stickybox-container">
+  <div class="raised" data-ea-publisher="readthedocs" data-ea-type="image" data-ea-style="stickybox"></div>
+</div>
+
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="best-practice/index.html" class="btn btn-neutral float-left" title="How-to guides: best practices" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting/index.html" class="btn btn-neutral float-right" title="How-to guides: troubleshooting problems" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Read the Docs, Inc &amp; contributors.
+      <span class="commit">Revision <code>6747f91a</code>.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- This style is injected ONLY on Read the Docs and it's missing. -->
+<style>
+ .rtd-current-item {
+   font-weight: bold;
+ }
+</style>
+
+<script type="text/javascript">
+ function renderLanguages(config) {
+   if (!config.projects.translations.length) {
+     return "";
+   }
+
+   const languagesHTML = `
+     <dl>
+       <dt>Languages</dt>
+       ${ config.projects.translations.map(
+       (translation) => `
+       <dd ${ translation.slug == config.projects.current.slug ? 'class="rtd-current-item"' : '' }>
+         <a href="${ translation.urls.documentation }">${ translation.language.code }</a>
+       </dd>
+       `).join("\n")}
+     </dl>
+   `;
+   return languagesHTML;
+ }
+
+  function renderVersions(config) {
+    if (!config.versions.active.length) {
+      return "";
+    }
+    const versionsHTML = `
+      <dl>
+        <dt>Versions</dt>
+        ${ config.versions.active.map(
+        (version) => `
+        <dd ${ version.slug === config.versions.current.slug ? 'class="rtd-current-item"' : '' }>
+          <a href="${ version.urls.documentation }">${ version.slug }</a>
+        </dd>
+        `).join("\n")}
+      </dl>
+    `;
+    return versionsHTML;
+  }
+
+  function renderDownloads(config) {
+    if (!Object.keys(config.versions.current.downloads).length) {
+      return "";
+    }
+    const downloadsNameDisplay = {
+      pdf: "PDF",
+      epub: "Epub",
+      htmlzip: "HTML",
+    };
+
+    const downloadsHTML = `
+      <dl>
+        <dt>Downloads</dt>
+        ${ Object.entries(config.versions.current.downloads).map(
+        ([name, url]) => `
+          <dd>
+            <a href="${ url }">${ downloadsNameDisplay[name] }</a>
+          </dd>
+        `).join("\n")}
+      </dl>
+    `;
+    return downloadsHTML;
+  }
+
+  document.addEventListener("readthedocs-addons-data-ready", function(event) {
+    const config = event.detail.data();
+
+    const flyout = `
+      <div class="rst-versions" data-toggle="rst-versions" role="note">
+        <span class="rst-current-version" data-toggle="rst-current-version">
+          <span class="fa fa-book"> Read the Docs</span>
+          v: ${ config.versions.current.slug }
+          <span class="fa fa-caret-down"></span>
+        </span>
+        <div class="rst-other-versions">
+          <div class="injected">
+            ${ renderLanguages(config) }
+            ${ renderVersions(config) }
+            ${ renderDownloads(config) }
+            <dl>
+              <dt>On Read the Docs</dt>
+              <dd>
+                <a href="${ config.projects.current.urls.home }">Project Home</a>
+              </dd>
+              <dd>
+                <a href="${ config.projects.current.urls.builds }">Builds</a>
+              </dd>
+              <dd>
+                <a href="${ config.projects.current.urls.downloads }">Downloads</a>
+              </dd>
+            </dl>
+            <dl>
+              <dt>Search</dt>
+              <dd>
+                <div style="padding: 6px;">
+                  <form id="flyout-search-form">
+                    <input
+                      class="wy-form"
+                      type="text"
+                      name="q"
+                      aria-label="Search docs"
+                      placeholder="Search docs"
+                      />
+                  </form>
+                </div>
+              </dd>
+            </dl>
+            <hr />
+            <small>
+              <span>Hosted by <a href="https://readthedocs.org">Read the Docs</a></span>
+              <span> &middot; </span>
+              <a href="https://docs.readthedocs.io/page/privacy-policy.html">Privacy Policy</a>
+            </small>
+          </div>
+        </div>
+    `;
+
+    // Inject the generated flyout into the body HTML element.
+    document.body.insertAdjacentHTML("beforeend", flyout);
+
+    // Trigger the Read the Docs Addons Search modal when clicking on the "Search" form from inside the flyout.
+    document.querySelector("#flyout-search-form").addEventListener("focusin", () => {
+      const event = new CustomEvent("readthedocs-search-show");
+      document.dispatchEvent(event);
+    });
+ });
+</script><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
