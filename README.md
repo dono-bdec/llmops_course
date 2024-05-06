@@ -9,8 +9,8 @@ This covers how to ingest documents into Chroma. It skips over text splitting, e
 2. Text Splitting:
 This covers a few examples for text splitters and ingesting them into Chroma
 
-Coming up...
-
 3. Embeddings
-   
+Looking at how embeddings work and using a couple of embedding models
+
+Coming up...
 4. Pre-processing techniques and query optimization
