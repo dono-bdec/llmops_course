@@ -57,7 +57,8 @@ store = Chroma.from_texts(
     embeddings, # Unlike directly using chromadb, we need to define the embeddings with langchain
     collection_name="readthedocs_openai", 
     persist_directory='llmops_s3_db',
-    metadatas=all_metadata
+    metadatas=all_metadata,
+    collection_metadata={"hnsw:space": "cosine"} #Change the distance function based on type of data
 )
 
 end_time_openai = time.time()
