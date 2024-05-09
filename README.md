@@ -12,5 +12,5 @@ This covers a few examples for text splitters and ingesting them into Chroma
 3. Embeddings
 Looking at how embeddings work and using a couple of embedding models
 
-Coming up...
-4. Pre-processing techniques and query optimization
+4. Slightly advanced
+Indexing, multi vector retrieval, semantic embeddings
