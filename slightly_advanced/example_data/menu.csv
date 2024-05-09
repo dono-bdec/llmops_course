@@ -1,0 +1,11 @@
+Menu Item ID,Menu Item Name,Diet,Chef Recommends
+id1,Chicken Fried Rice,NV,N
+id2,Vegetable Noodles,V,N
+id3,Goat Fried Rice,NV,Y
+id4,Vegetable Fried Rice,V,Y
+id5,Prawns Noodles,NV,N
+id6,Potato Rolls,NV,N
+id7,Honey chili potato,V,Y
+id8,Fried Goat,NV,N
+id9,Chicken Wonton Soup,NV,N
+id10,Chicken Soup,V,Y
