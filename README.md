@@ -14,3 +14,6 @@ Looking at how embeddings work and using a couple of embedding models
 
 4. Slightly advanced
 Indexing, multi vector retrieval, semantic embeddings
+
+5. rag
+Contains RAG samples
