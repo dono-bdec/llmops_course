@@ -6,3 +6,5 @@ langchain
 beautifulsoup4
 pypdf
 wikipedia
+renumics-spotlight
+

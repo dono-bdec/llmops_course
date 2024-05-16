@@ -8,6 +8,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 CHROMA_PATH = os.path.join(os.getcwd(), "chroma_db")
+azure_embeddings=""
 
 def load_document(file):
     import os
@@ -54,11 +55,12 @@ def create_embeddings_chroma(chunks, persist_directory=CHROMA_PATH):
 #VVA    embeddings = AzureOpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536)  
     embeddings = AzureOpenAIEmbeddings(
         model="ADA_RAG_DONO_DEMO",
-        api_key="39f2089f6a2a4c52967260b0e9ffdc33",
+        api_key="API-KEY",
         api_version="2024-02-01",
-        azure_endpoint="https://dono-rag-demo-resource-instance.openai.azure.com"
+        azure_endpoint="API-ENDPOINT"
     )
 
+    azure_embeddings = embeddings
     # Create a Chroma vector store using the provided text chunks and embedding model, 
     # configuring it to save data to the specified directory 
     vector_store = Chroma.from_documents(chunks, embeddings, persist_directory=persist_directory) 
@@ -74,9 +76,9 @@ def load_embeddings_chroma(persist_directory=CHROMA_PATH):
 #    embeddings = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536) 
     embeddings = AzureOpenAIEmbeddings(
     model="ADA_RAG_DONO_DEMO",
-    api_key="39f2089f6a2a4c52967260b0e9ffdc33",
+    api_key="API-KEY",
     api_version="2024-02-01",
-    azure_endpoint="https://dono-rag-demo-resource-instance.openai.azure.com"
+    azure_endpoint="API-ENDPOINT"
     )
 
     # Load a Chroma vector store from the specified directory, using the provided embedding function
@@ -87,25 +89,49 @@ def load_embeddings_chroma(persist_directory=CHROMA_PATH):
 def ask_and_get_answer(vector_store, q, k=3):
     from langchain.chains import RetrievalQA
     from langchain_openai import ChatOpenAI
+    from langchain.prompts import PromptTemplate
+    from datasets import Dataset 
+    from ragas.metrics import faithfulness, answer_relevancy, context_precision, context_recall, context_entity_recall, answer_similarity, answer_correctness
+    from ragas.metrics.critique import harmfulness
+    from ragas import evaluate
 
 #    llm = ChatOpenAI(model='gpt-3.5-turbo', temperature=1)
     llm = AzureChatOpenAI(temperature=0,
-                      api_key="39f2089f6a2a4c52967260b0e9ffdc33",
+                      api_key="API-KEY",
                       api_version="2024-02-01",
-                      azure_endpoint="https://dono-rag-demo-resource-instance.openai.azure.com",
+                      azure_endpoint="API-ENDPOINT",
                       model="GPT_35_TURBO_DEMO_RAG_DEPLOYMENT_DONO")
 
     retriever = vector_store.as_retriever(search_type='similarity', search_kwargs={'k': k})
 
-    chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever)
+    PROMPT_TEMPLATE = """
+Go through the context and answer given question strictly based on context. 
+Context: {context}
+Question: {question}
+Answer:
+"""
+    chain = RetrievalQA.from_chain_type(llm=llm, 
+                                        chain_type_kwargs={"prompt": PromptTemplate.from_template(PROMPT_TEMPLATE)}, 
+                                        retriever=retriever)
     
-    answer = chain.invoke(q)
-    return answer
+    
+    # answer = chain.invoke(q)
+    queries = [
+    "When was Lata Mangeshkar Born?",
+    "Where did Lata Mangeshkar spend her childhood"    
+    ]
+
+    results = []
+    for query in queries:
+        result = chain({"query": query})   
+        print(result)
+        results.append(result['result'])
+
+    return results
     
 
 # Loading the pdf document into LangChain 
-# data = load_document(os.path.join( os.getcwd(), 'files', 'rag_powered_by_google_search.pdf'))
-
+#data = load_document(os.path.join( os.getcwd(), 'files', 'rag_powered_by_google_search.pdf'))
 data = load_from_wikipedia("Lata Mangeshkar")
 
 # Splitting the document into chunks
@@ -118,3 +144,4 @@ vector_store = create_embeddings_chroma(chunks)
 q = 'When was Lata Mangeshkar born and where was her childhood spent?'
 answer = ask_and_get_answer(vector_store, q)
 print(answer)
+
