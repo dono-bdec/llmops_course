@@ -54,9 +54,9 @@ def create_embeddings_chroma(chunks, persist_directory=CHROMA_PATH):
 #VVA    embeddings = AzureOpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536)  
     embeddings = AzureOpenAIEmbeddings(
         model="ADA_RAG_DONO_DEMO",
-        api_key="39f2089f6a2a4c52967260b0e9ffdc33",
+        api_key="API-KEY",
         api_version="2024-02-01",
-        azure_endpoint="https://dono-rag-demo-resource-instance.openai.azure.com"
+        azure_endpoint="API-ENDPOINT"
     )
 
     # Create a Chroma vector store using the provided text chunks and embedding model, 
@@ -74,9 +74,9 @@ def load_embeddings_chroma(persist_directory=CHROMA_PATH):
 #    embeddings = OpenAIEmbeddings(model='text-embedding-3-small', dimensions=1536) 
     embeddings = AzureOpenAIEmbeddings(
     model="ADA_RAG_DONO_DEMO",
-    api_key="39f2089f6a2a4c52967260b0e9ffdc33",
+    api_key="API-KEY",
     api_version="2024-02-01",
-    azure_endpoint="https://dono-rag-demo-resource-instance.openai.azure.com"
+    azure_endpoint="API-ENDPOINT"
     )
 
     # Load a Chroma vector store from the specified directory, using the provided embedding function
@@ -90,9 +90,9 @@ def ask_and_get_answer(vector_store, q, k=3):
 
 #    llm = ChatOpenAI(model='gpt-3.5-turbo', temperature=1)
     llm = AzureChatOpenAI(temperature=0,
-                      api_key="39f2089f6a2a4c52967260b0e9ffdc33",
+                      api_key="API-KEY",
                       api_version="2024-02-01",
-                      azure_endpoint="https://dono-rag-demo-resource-instance.openai.azure.com",
+                      azure_endpoint="API-ENDPOINT",
                       model="GPT_35_TURBO_DEMO_RAG_DEPLOYMENT_DONO")
 
     retriever = vector_store.as_retriever(search_type='similarity', search_kwargs={'k': k})
