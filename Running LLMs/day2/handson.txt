@@ -1,2 +1,3 @@
-1. Implement WikipediaQueryRun tool from LangChain and search for Generative artificial intelligence and obtain the content of the page
-2. Implement a tool using YouTubeSearchTool and YoutubeLoader to search and obtain transcript of a video obtained on searching ‘LangChain’ in YouTube 
+
+1. Visit python.langchain.com/docs/modules/model_io/prompts/example_selectors/ngram_overlap/and implement n-gram overlap selector
+2. Visit python.langchain.com/docs/modules/model_io/prompts/example_selectors/similarity/and implement semantic similarity selector
