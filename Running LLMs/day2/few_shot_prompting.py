@@ -41,6 +41,6 @@ prompt = FewShotPromptTemplate(
 print(prompt.format(input="When did World War 1 end?"))
 
 from langchain_openai import AzureChatOpenAI
-chat = AzureChatOpenAI(temperature=0,api_key="39f2089f6a2a4c52967260b0e9ffdc33",api_version="2024-02-01",azure_endpoint="https://dono-rag-demo-resource-instance.openai.azure.com",model="GPT_35_TURBO_DEMO_RAG_DEPLOYMENT_DONO")
+chat = AzureChatOpenAI(temperature=0,api_key="",api_version="2024-02-01",azure_endpoint="https://dono-rag-demo-resource-instance.openai.azure.com",model="GPT_35_TURBO_DEMO_RAG_DEPLOYMENT_DONO")
 
 chat.invoke(prompt.format(input="When did World War 1 end?"))
