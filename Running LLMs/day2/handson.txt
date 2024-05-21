@@ -1,0 +1,3 @@
+
+1. Visit python.langchain.com/docs/modules/model_io/prompts/example_selectors/ngram_overlap/and implement n-gram overlap selector
+2. Visit python.langchain.com/docs/modules/model_io/prompts/example_selectors/similarity/and implement semantic similarity selector
