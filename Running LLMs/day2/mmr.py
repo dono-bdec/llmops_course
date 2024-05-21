@@ -30,7 +30,7 @@ embeddings = AzureOpenAIEmbeddings(
 
     model="ADA_RAG_DONO_DEMO",
 
-    api_key="39f2089f6a2a4c52967260b0e9ffdc33",
+    api_key="",
 
     api_version="2024-02-01",
 
