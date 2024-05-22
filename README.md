@@ -17,3 +17,5 @@ Indexing, multi vector retrieval, semantic embeddings
 
 5. rag
 Contains RAG samples
+
+6. Running LLMs: Introductory code base for running LLMs and LangChain use cases

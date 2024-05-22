@@ -11,7 +11,7 @@ from IPython.display import clear_output
 
 #defining a function for getting the stock price dataset of a particular company
 def get_stock_price(company):
-    url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+company+"&apikey=ADZNUQ7X21G5K7NB"
+    url = "https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol="+company+"&apikey=<stock-api-key>"
     response = requests.get(url).json()
     volume = response['Time Series (Daily)']['2024-02-23']['5. volume']
     high = response['Time Series (Daily)']['2024-02-23']['2. high']

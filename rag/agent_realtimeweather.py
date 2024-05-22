@@ -8,10 +8,10 @@ import os
 def main():
 
  azure_config = {
-    "base_url": "https://dono-rag-demo-resource-instance.openai.azure.com/",
-    "model_deployment": "GPT_35_TURBO_DEMO_RAG_DEPLOYMENT_DONO",
+    "base_url": "<base-url>",
+    "model_deployment": "<model-deployment-name>",
     "model_name": "gpt-35-turbo",
-    "embedding_deployment": "ADA_RAG_DONO_DEMO",
+    "embedding_deployment": "<embedding-deployment-name>",
     "embedding_name": "text-embedding-ada-002",
     "api-key": "api-key",
     "api_version": "2024-02-01"
@@ -65,14 +65,14 @@ def main():
 def get_weather(location):
    #calling open weather map API for information retrieval
    #fetching latitude and longitude of the specific location respectively
-    url = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=1&appid=30d717876be7e2747bdf9d8cad1e8216"
+    url = "http://api.openweathermap.org/geo/1.0/direct?q=" + location + "&limit=1&appid=<weather api key>"
     response=requests.get(url)
     print(response)
     get_response=response.json()
     latitude=get_response[0]['lat']
     longitude = get_response[0]['lon']
 
-    url_final = "https://api.openweathermap.org/data/3.0/onecall?lat=" + str(latitude) + "&lon=" + str(longitude) + "&appid=30d717876be7e2747bdf9d8cad1e8216"
+    url_final = "https://api.openweathermap.org/data/3.0/onecall?lat=" + str(latitude) + "&lon=" + str(longitude) + "&appid=<weather-api-key>"
     final_response = requests.get(url_final)
     final_response_json = final_response.json()
     #print(final_response_json)
