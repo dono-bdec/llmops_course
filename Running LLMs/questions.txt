@@ -1,3 +1,4 @@
+Day 1:
 1. Can algorithms like SMOTE/ROSE which synthesize new examples from the training data be called Generative AI?
 
 Day 2:
