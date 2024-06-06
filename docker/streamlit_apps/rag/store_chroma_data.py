@@ -10,7 +10,7 @@ from langchain_openai import AzureOpenAIEmbeddings
 import chromadb
 
 
-chromadbClient = chromadb.HttpClient(host="127.0.0.1", port="1201")
+
 
 all_text_files = glob.glob('sample_text_files/*.txt')
 
@@ -56,6 +56,8 @@ for i in range(0,len(all_documents)):
         all_docs.append(each_doc)
         all_metadata.append({"reference": all_text_files[i]})
 
+
+chromadbClient = chromadb.HttpClient(host="<hostname>", port="<port>")
 
 embeddings = AzureOpenAIEmbeddings(
     # Add the details here

@@ -10,7 +10,7 @@ openai_ef = embedding_functions.OpenAIEmbeddingFunction(
     # Add the details here
 )
 
-chroma_client = chromadb.HttpClient(host="127.0.0.1", port="1201", )
+chroma_client = chromadb.HttpClient(host="<hostname>", port="<portexposed>" )
 collection = chroma_client.get_collection(name="alltextfiles_openai", embedding_function=openai_ef)
 
 results=collection.query(query_texts=["Wilder"], n_results=3)
