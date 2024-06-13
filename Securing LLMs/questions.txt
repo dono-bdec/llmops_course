@@ -1,0 +1,4 @@
+1. visit the link and install the application - https://github.com/leondz/garak?tab=readme-ov-file
+2. choose a model of your choice.
+3. perform vulnerability test
+4. Generate the report and share it.
